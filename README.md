@@ -6,6 +6,7 @@
 SDK架构及资源   ：https://blog.bihe0832.com/sdk_design_structure_resource.html              
 SDK接口设计    ：https://blog.bihe0832.com/sdk_desigin_api.html              
 
+block ：https://blog.csdn.net/zc639143029/article/details/50084227             
 
 1.facebook : 框架.            
 FBAudienceNetwork.framework	           
