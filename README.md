@@ -13,20 +13,20 @@ FBAudienceNetwork.framework
 
 mopub:  https://github.com/mopub/mopub-ios-sdk/releases               
 unityAds : https://github.com/Unity-Technologies/unity-ads-ios
-# **iOS集成UpArpuSDK**#
+# **iOS集成UpArpuSDK**
 
-## 1 简介##
+## 1 简介
 本文档介绍如何去集成iOS端的UparpuSDK（后面简称为SDK），包括获取开发者账号，获取AppID和AppKey并创建配置进行广告投放。
-### 1.1 支持的广告类型###
+### 1.1 支持的广告类型
 UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广告，插屏广告(intersitial)和开屏广告(splash)。
-### 1.2 SDK架构###
+### 1.2 SDK架构
 ![](UpArpuSDK_Architecture.png)
-## <h2 id='1'>2 配置</h2>##
-### 2.1 基础配置###
+## <h2 id='1'>2 配置</h2>
+### 2.1 基础配置
 	Xcode10版本及以上。
 	Target iOS 8.0及以上。
 
-### 2.2 导入基础核心框架###
+### 2.2 导入基础核心框架
 核心模块包含以下框架和资源包文件，只需将它们拖放到Xcode中。
 
 |File|Note|
@@ -37,14 +37,14 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 
 **注:** 由于**UpArpuSDK**不支持cocoapod，以UpArpu开头的framewrok必须手动下载并导入到您的项目中，而第三方SDK可以使用cocoapod集成。
 
-### 2.3 配置 Build Settings 和 Info.plist##
+### 2.3 配置 Build Settings 和 Info.plist
 
 1) 在 Xcode中, 点击到 **Build Settings**, 搜索 **Other Linker Flags** 然后添加 **-ObjC**(这里的字母O和字母C**需要大写**), 注意 **Linker Flags** 是区分大小写的:
 ![](Other_Linker_Flags.png)
 如果您没有看到如上图所示的弹出窗口，只需双击 **Other Linker Flags**。<br><br>
 2) 在您app的Info.plist中添加 **NSAllowsArbitraryLoads** 禁用ATS限制。
 ![](Info_Plist_HTTP.png)
-### 2.4 导入第三方的SDK###
+### 2.4 导入第三方的SDK
 
 
 |第三方平台|需要导入的包|**TopOn**支持的版本|下载链接|参考网址|备注|
@@ -73,7 +73,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 
 您可以使用CocoaPods导入第三方SDK，也可以手动下载导入第三方SDK。
 
-### 2.4 初始化SDK###
+### 2.4 初始化SDK
 
 您需要在**AppDelegate**的**application:didFinishLaunchingWithOptions:**方法里面初始化**UpArpuSDK**(必须在请求广告之前去初始化SDK)：
 
@@ -84,7 +84,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
     return YES;
 }</code></pre>
 
-### 2.5 使用UpArpu的广告位进行测试###
+### 2.5 使用UpArpu的广告位进行测试
 使用**UpArpuSDK**提供的测试广告位可以更快地测试广告功能，如下图所示：
 
 |Ad Format|Placement ID|
@@ -99,10 +99,10 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 注：使用这些广告位需要关联 **AppID**：a5b0e8491845b3 和 **AppKey**：7eae0567827cfe2b22874061763f30c9 <br>
 测试完成之后，您需要将**id**和**key**更改为您自己在**TopOn**账号下创建的**id**和**key**。
 
-## 3 开屏广告(Splash)##
+## 3 开屏广告(Splash)
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-### 3.1 导入 Splash Framework###
+### 3.1 导入 Splash Framework
 将**UpArpuSplash.framework**拖到您的项目中，除了**UpArpuSplash.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -111,7 +111,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 |GDT|UpArpuGDTSplashAdapter.framework|
 |Baidu|UpArpuBaiduSplashAdapter.framework|
 
-### 3.1 加载并展示Splash###
+### 3.1 加载并展示Splash
 加载并展示Splash广告的最佳时机是在应用程序的入口，即**AppDelegate**的**application:didFinishLaunchingWithOptions:**方法中，Splash的加载和展示是统一的一个API，您可以使用以下代码加载并展示一个Splash广告：
 
 <pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -124,7 +124,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 
 **注**: 在加载和展示之前调用**self.window**的**makeKeyAndVisible**方法[self.window makeKeyAndVisible];
 
-### 3.2 实现Splash的Delegate###
+### 3.2 实现Splash的Delegate
 
 您可以实现**UPArpuSplashDelegate**的方法来获取Splash的各种事件。<br> 
 1）您需要确认您的app添加了**UPArpuSplashDelegate**代理协议：
@@ -158,9 +158,9 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 </code></pre>
 
 
-## 4激励视频(Rewarded Video)##
+## 4激励视频(Rewarded Video)
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
-### 4.1 导入Rewarded Video Framework###
+### 4.1 导入Rewarded Video Framework
 将**UpArpuRewardedVideo.framework**拖到您的项目中，除了**UpArpuRewardedVideo.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -187,7 +187,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 |Inmobi|UpArpuInmobiRewardedVideoAdapter.framework|
 |Adcolony|UpArpuAdcolonyRewardedVideoAdapter.framework|
 
-### 4.2 加载Rewarded Video###
+### 4.2 加载Rewarded Video
 您需要确认您添加了**UPArpuRewardedVideoDelegate**代理协议：
 <pre><code>@interface UPArpuRewardedVideoViewController()\<UPArpuRewardedVideoDelegate\>
 //Other properties&methods declarations
@@ -206,7 +206,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
     NSLog(@"RV Demo: failed to load:%@", error);
 }</code></pre>
 
-### 4.3 判断Rewarded Video是否ready###
+### 4.3 判断Rewarded Video是否ready
 您可以检查rewarded video广告是否已经ready：
 <pre><code>
 if ([[UPArpuAdManager sharedManager] rewardedVideoReadyForPlacementID:@"your rv placement id"]) {
@@ -216,14 +216,14 @@ if ([[UPArpuAdManager sharedManager] rewardedVideoReadyForPlacementID:@"your rv 
 }
 </code></pre>
 
-###4.4 展示Rewarded Video###
+### 4.4 展示Rewarded Video
 在您rewared video加载完成之后，您可以调用API去展示rewared video：
  
 <pre><code>-(void) showAD {
     [[UPArpuAdManager sharedManager] showRewardedVideoWithPlacementID:@"rv_placement_id" inViewController:self delegate:self];
 }</code></pre>
 
-###4.5 实现Rewarded Video的Delegate###
+### 4.5 实现Rewarded Video的Delegate
 您可以实现**Rewarded Video Delegate**的方法来获取rewarded video的各种事件：
 
 <pre><code>#pragma mark - showing delegate
@@ -247,10 +247,10 @@ if ([[UPArpuAdManager sharedManager] rewardedVideoReadyForPlacementID:@"your rv 
     NSLog(@"RV Demo: rewardedVideoDidClickForPlacementID:%@", placementID);
 }</code></pre>
 
-##5 插屏广告(Interstitial)##
+## 5 插屏广告(Interstitial)
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-###5.1 导入Interstitial Framework###
+### 5.1 导入Interstitial Framework
 将**UpArpuInterstitial.framework**拖到您的项目中，除了**UpArpuInterstitial.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -277,7 +277,7 @@ if ([[UPArpuAdManager sharedManager] rewardedVideoReadyForPlacementID:@"your rv 
 |Inmobi|UpArpuInmobiInterstitialAdapter.framework|
 |Adcolony|UpArpuAdcolonyInterstitialAdapter.framework|
 
-###5.2 加载Interstitial###
+### 5.2 加载Interstitial
 您需要确认你添加了**UPArpuInterstitialDelegate**代理协议：
 <pre><code>@interface UPArpuInterstitialViewController()\<UPArpuInterstitialDelegate\>
 //Other properties&methods declarations
@@ -296,7 +296,7 @@ if ([[UPArpuAdManager sharedManager] rewardedVideoReadyForPlacementID:@"your rv 
     NSLog(@"Interstitial Demo: failed to load:%@", error);
 }</code></pre>
 
-###5.3 判断Interstitial是否Ready###
+### 5.3 判断Interstitial是否Ready
 您可以检查interstitial广告是否已经ready：
 <pre><code>
 if ([[UPArpuAdManager sharedManager] interstitialReadyForPlacementID:@"your interstitial placement id"]) {
@@ -306,14 +306,14 @@ if ([[UPArpuAdManager sharedManager] interstitialReadyForPlacementID:@"your inte
 }
 </code></pre>
 
-###5.4 展示Interstitial###
+### 5.4 展示Interstitial
 在您Interstitial加载完成之后，您可以调用API去展示Interstitial：
  
 <pre><code>-(void) showAD {
     [[UPArpuAdManager sharedManager] showInterstitialWithPlacementID:@"interstitial_placement_id" inViewController:self delegate:self];
 }</code></pre>
 
-###5.5 实现Interstitial的Delegate###
+### 5.5 实现Interstitial的Delegate
 您可以实现**UPArpuInterstitialDelegate**的方法来获取interstitial的各种事件：
 <pre><code>#pragma mark - showing delegate
 -(void) interstitialDidShowForPlacementID:(NSString *)placementID {
@@ -344,10 +344,10 @@ if ([[UPArpuAdManager sharedManager] interstitialReadyForPlacementID:@"your inte
     NSLog(@"UPArpuInterstitialViewController::interstitialDidClickForPlacementID:%@", placementID);
 }</code></pre>
 
-##6 Banner广告##
+## 6 Banner广告
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-###6.1 导入Banner Framework###
+### 6.1 导入Banner Framework
 将**UpArpuBanner.framework**拖到您的项目中，除了**UpArpuBanner.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -366,7 +366,7 @@ if ([[UPArpuAdManager sharedManager] interstitialReadyForPlacementID:@"your inte
 |Mopub|UpArpuMopubBannerAdapter.framework|
 |Mopub|UpArpuInmobiBannerAdapter.framework|
 
-###6.2 加载Banner###
+### 6.2 加载Banner
 您需要确认你添加了**UPArpuBannerDelegate**代理协议：
 <pre><code>@interface UPArpuBannerViewController()\<UPArpuBannerDelegate\>
 //Other properties&methods declarations
@@ -384,7 +384,7 @@ if ([[UPArpuAdManager sharedManager] interstitialReadyForPlacementID:@"your inte
     NSLog(@"Banner Demo: failed to load:%@", error);
 }</code></pre>
 
-###6.3 判断Banner是否Ready###
+### 6.3 判断Banner是否Ready
 
 您可以检查banner广告是否已经ready：
 
@@ -396,7 +396,7 @@ if ([[UPArpuAdManager sharedManager] bannerAdReadyForPlacementID:@"your banner p
 }
 </code></pre>
 
-###6.4 展示Banner###
+### 6.4 展示Banner
 在您banner加载完成之后，您可以调用API去展示banner：
  
 <pre><code>-(void) showBanner {
@@ -417,7 +417,7 @@ if ([[UPArpuAdManager sharedManager] bannerAdReadyForPlacementID:@"your banner p
     }
 }</code></pre>
 
-###6.5 实现Banner的Delegate###
+### 6.5 实现Banner的Delegate
 您可以实现**UPArpuBannerDelegate**的方法来获取banner的各种事件：
 <pre><code>-(void) bannerView:(UPArpuBannerView *)bannerView didShowAdWithPlacementID:(NSString *)placementID {
     NSLog(@"UPArpuBannerViewController::bannerView:didShowAdWithPlacementID:%@", placementID);
@@ -439,11 +439,11 @@ if ([[UPArpuAdManager sharedManager] bannerAdReadyForPlacementID:@"your banner p
     NSLog(@"UPArpuBannerViewController::bannerView:failedToAutoRefreshWithPlacementID:%@ error:%@", placementID, error);
 }</code></pre>
 
-##7 原生广告(Native)##
+## 7 原生广告(Native)
 
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-###7.1 导入Native Framework###
+### 7.1 导入Native Framework
 将**UpArpuNative.framework**拖到您的项目中，除了**UpArpuNative.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -462,7 +462,7 @@ if ([[UPArpuAdManager sharedManager] bannerAdReadyForPlacementID:@"your banner p
 |Mintegral|UpArpuMintegralNativeAdapter.framework|
 |Mopub|UpArpuMopubNativeAdapter.framework|
 
-###7.2 加载Native###
+### 7.2 加载Native
 您需要确认你添加了**UPArpuNativeADDelegate**代理协议：
 <pre><code>@interface UPArpuNativeViewController()\<UPArpuNativeADDelegate\>
 //Other properties&methods declarations
@@ -481,7 +481,7 @@ if ([[UPArpuAdManager sharedManager] bannerAdReadyForPlacementID:@"your banner p
     NSLog(@"Native Demo: failed to load:%@", error);
 }</code></pre>
 
-###7.3 展示Native###
+### 7.3 展示Native
 您可以检查Native广告是否已经ready：
  
 <pre><code>-(void) showAD {
@@ -494,7 +494,7 @@ if ([[UPArpuAdManager sharedManager] bannerAdReadyForPlacementID:@"your banner p
     [self.view addSubview:adView];
 }</code></pre>
 
-####7.3.1 实现Custom Native Ad View####
+#### 7.3.1 实现Custom Native Ad View
 要展示一个Native广告，您需要定义一个自定义的视图，它需要继承于**UPNativeADView**，并添加**UPNativeRendering**协议。所以需要您去实现某些方法，在我们的Demo中，我们通过添加一些属性，确保协议中的方法可以获取到这些属性。
 <pre><code>@interface DMADView:UPArpuNativeADView
 @property(nonatomic, readonly) UILabel \*advertiserLabel;
@@ -574,7 +574,7 @@ UI元素包括：
 您也可以使用**Masonary**开源布局工具，此外还有**struts&springs**布局技术，使用该方法的时候，建议您重写layoutSubviews方法，并给您的subviews设置frames。
 使用何种布局技术完全取决于您，可以根据您的习惯任意选择，it‘s up to you。
 
-####7.3.2 使用您的Custom Native Ad View展示Native####
+#### 7.3.2 使用您的Custom Native Ad View展示Native
 展示广告之前，您需要先创建一个**UPNativeADConfiguration**实例，设置您想要的广告大小。定制广告视图的类，也可以用来去实现delegate获取各种展示的事件，之后你可以调用**UPArpuAdManager**的单例方法**retriveAdViewWithPlacementID:configuration:**并带上placementid会返回一个您准备的广告视图对象，您只需要将其添加到您想要展示广告的视图之上：
 
 
@@ -587,8 +587,8 @@ UI元素包括：
     adView.tag = adViewTag;
     [self.view addSubview:adView];
 }</code></pre>
-
-###7.4 实现Native的Delegate###
+ 
+### 7.4 实现Native的Delegate
 您可以实现**UPArpuNativeDelegate**的方法来获取banner的各种事件：
 
 <pre><code>//Called when user click the ad
@@ -600,10 +600,10 @@ UI元素包括：
     adView.mainImageView.hidden = [adView isVideoContents];
 }</code></pre>
 
-##8 (原生Banner)Native Banner##
+## 8 (原生Banner)Native Banner
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-###8.1 导入Native Framework###
+### 8.1 导入Native Framework
 将**UpArpuNative.framework**拖到您的项目中，除了**UpArpuNative.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -622,7 +622,7 @@ UI元素包括：
 |Mintegral|UpArpuMintegralNativeAdapter.framework|
 |Mopub|UpArpuMopubNativeAdapter.framework|
 
-###8.2 加载Native Banner###
+### 8.2 加载Native Banner
 您需要确认你添加了**UPArpuNativeBannerDelegate**代理协议：
 <pre><code>@interface UPArpuNativeBannerViewController()\<UPArpuNativeBannerDelegate\>
 //Other properties&methods declarations
@@ -631,7 +631,7 @@ UI元素包括：
 加载NativeBanner广告:
 <pre><code>[UPArpuNativeBannerWrapper loadNativeBannerAdWithPlacementID:_placementID extra:nil customData:nil delegate:self];</code></pre>
 
-###8.3 展示Native Banner###
+### 8.3 展示Native Banner
 在您NativeBanner加载完成之后，您可以调用API去展示NativeBanner：
  
 <pre><code>-(void) showAd {
@@ -641,7 +641,7 @@ UI元素包括：
     [self.view addSubview:bannerView];
 }</code></pre>
 
-###8.4 实现Native Banner的Delegate###
+### 8.4 实现Native Banner的Delegate
 <pre><code>#pragma mark - native banner delegate(s)
 -(void) didFinishLoadingNativeBannerAdWithPlacementID:(NSString *)placementID {
     NSLog(@"UPArpuNativeBannerViewController::didFinishLoadingNativeBannerAdWithPlacementID:%@", placementID);
@@ -671,10 +671,10 @@ UI元素包括：
     NSLog(@"UPArpuNativeBannerViewController::didFailToAutorefreshNativeBannerAdInView:%@ placementID:%@ error:%@", bannerView, placementID, error);
 }</code></pre>
 
-##9 (原生Splash)Native Splash##
+## 9 (原生Splash)Native Splash
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-###9.1 导入 Native Framework###
+### 9.1 导入 Native Framework
 Native Splash是基于Native实现的，所以你需要导入同样的**UpArpuNative.framework**到您的项目中，除了**UpArpuNative.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -693,7 +693,7 @@ Native Splash是基于Native实现的，所以你需要导入同样的**UpArpuNa
 |Mintegral|UpArpuMintegralNativeAdapter.framework|
 |Mopub|UpArpuMopubNativeAdapter.framework|
 
-###9.2 加载Native Splash###
+### 9.2 加载Native Splash
 您需要确认你添加了**UPArpuNativeSplashDelegate**代理协议：
 <pre><code>@interface UPArpuNativeSplashViewController()\<UPArpuNativeSplashDelegate\>
 //Other properties&methods declarations
@@ -702,7 +702,7 @@ Native Splash是基于Native实现的，所以你需要导入同样的**UpArpuNa
 加载native splash广告:
 <pre><code>[UPArpuNativeSplashWrapper loadNativeSplashAdWithPlacementID:@"native splash placement id" extra:@{kExtraInfoNativeAdTypeKey:@(UPArpuGDTNativeAdTypeSelfRendering), kExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds) - 30.0f, 400.0f)], kUPArpuExtraNativeImageSizeKey:kUPArpuExtraNativeImageSize690_388, kUPArpuNativeSplashShowingExtraCountdownIntervalKey:@3} customData:nil delegate:self];</code></pre>
 
-###9.3 展示Native Splash###
+### 9.3 展示Native Splash
 在您Native Splash加载完成之后，您可以调用API去展示banner：
  
 <pre><code>-(void) showAd {
@@ -714,7 +714,7 @@ Native Splash是基于Native实现的，所以你需要导入同样的**UpArpuNa
     [UPArpuNativeSplashWrapper showNativeSplashAdWithPlacementID:placementID extra:@{kUPArpuNatievSplashShowingExtraStyleKey:kUPArpuNativeSplashShowingExtraStylePortrait, kUPArpuNativeSplashShowingExtraCountdownIntervalKey:@3, kUPArpuNativeSplashShowingExtraContainerViewKey:label} delegate:self];
 }</code></pre>
 
-###9.4 实现Native Splash的Delegate###
+### 9.4 实现Native Splash的Delegate
 您可以实现**UPArpuNativeSplashDelegate**的方法来获取Splash的各种事件：
 
 <pre><code>-(void) finishLoadingNativeSplashAdForPlacementID:(NSString*)placementID {
@@ -739,7 +739,7 @@ NSLog(@"ViewController::finishLoadingNativeSplashAdForPlacementID:%@", placement
 }</code></pre>
 
 
-##10 头部竞价(Header Bidding)##
+## 10 头部竞价(Header Bidding)
 
 应用内header bidding是一种先进的程序化广告竞价技术，允许所有需求方针对同一个广告展示同时竞价，最高出价者获得展示机会，这确保发布商的每次展示可以获得更高的收益。目前TopOn平台支持Mintegral和Facebook的应用内header bidding。
 
@@ -755,7 +755,7 @@ Mintegral和Facebook支持header bidding的应用版本如下：
 
 注：Facebook的应用内header bidding需要引外额外的SDK。
 
-##11 通用数据保护条例GDPR##
+## 11 通用数据保护条例GDPR
 
 <span style="font-family:‘Times New Roman‘;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>欧盟发布的**《通用数据保护条例》（GDPR）**将于 2018 年 5 月 25 日生效。 为支持GDPR协议我们更新了**<i>UPARPU Privacy Policy</i>**，请开发者从我们官网了解<a href="https://www.uparpu.com/privacy-policy" target = "_blank">**<i>UPARPU Privacy Policy</i>**</a>的相关内容。同时，为保障用户数据的隐私安全，我们在新版的UPARPU SDK v1.2及以上中加入了数据保护功能，请开发者查阅以下文档并完成SDK接入。<br>
 <span style="font-family:‘Times New Roman‘;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>我们提供了两种方法给开发者设置GDPR配置。你可以调用UPARPU SDK的方法来为所有网络设置统一的数据保护级别，也可以分别为各网络设置数据保护级别；如果是后者，传入的数据结构需与第三方网络的要求一致而且这些数据结构在未来可能会发生改变。<br>
@@ -770,7 +770,7 @@ Mintegral和Facebook支持header bidding的应用版本如下：
 <span style="font-family:‘Times New Roman‘;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>4) UpArpuDataConsentSetForbidden(3)<br>
 <span style="font-family:‘Times New Roman‘;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>禁止收集任何数据，SDK初始化将失败，广告请求将不会发起。<br>
 
-###4.2 Setting data consent separately###
+### 4.2 Setting data consent separately
 以上四种值为枚举类型，你可以设置每一个平台的数据接受度信息，根据不同平台的规范，您应该为平台提供如下的信息：<br>
 **Mintegral**: 您可以以@0(上述枚举类型)作为key设置@YES或者@NO，以此来收集三种类型的数据，例如(@0，@yes)，(@1:yes ,@2:no ,@3:@yes)。有关详情，情浏览其官方网站。<br>
   **Inmobi**: BOOL被包装成NSNumber<br>
