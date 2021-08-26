@@ -13,20 +13,20 @@ FBAudienceNetwork.framework
 
 mopub:  https://github.com/mopub/mopub-ios-sdk/releases               
 unityAds : https://github.com/Unity-Technologies/unity-ads-ios
-#**iOS集成UpArpuSDK**#
+# **iOS集成UpArpuSDK**#
 
-##1 简介##
+## 1 简介##
 本文档介绍如何去集成iOS端的UparpuSDK（后面简称为SDK），包括获取开发者账号，获取AppID和AppKey并创建配置进行广告投放。
-###1.1 支持的广告类型###
+### 1.1 支持的广告类型###
 UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广告，插屏广告(intersitial)和开屏广告(splash)。
-###1.2 SDK架构###
+### 1.2 SDK架构###
 ![](UpArpuSDK_Architecture.png)
-##<h2 id='1'>2 配置</h2>##
-###2.1 基础配置###
+## <h2 id='1'>2 配置</h2>##
+### 2.1 基础配置###
 	Xcode10版本及以上。
 	Target iOS 8.0及以上。
 
-###2.2 导入基础核心框架###
+### 2.2 导入基础核心框架###
 核心模块包含以下框架和资源包文件，只需将它们拖放到Xcode中。
 
 |File|Note|
@@ -37,14 +37,14 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 
 **注:** 由于**UpArpuSDK**不支持cocoapod，以UpArpu开头的framewrok必须手动下载并导入到您的项目中，而第三方SDK可以使用cocoapod集成。
 
-###2.3 配置 Build Settings 和 Info.plist##
+### 2.3 配置 Build Settings 和 Info.plist##
 
 1) 在 Xcode中, 点击到 **Build Settings**, 搜索 **Other Linker Flags** 然后添加 **-ObjC**(这里的字母O和字母C**需要大写**), 注意 **Linker Flags** 是区分大小写的:
 ![](Other_Linker_Flags.png)
 如果您没有看到如上图所示的弹出窗口，只需双击 **Other Linker Flags**。<br><br>
 2) 在您app的Info.plist中添加 **NSAllowsArbitraryLoads** 禁用ATS限制。
 ![](Info_Plist_HTTP.png)
-###2.4 导入第三方的SDK###
+### 2.4 导入第三方的SDK###
 
 
 |第三方平台|需要导入的包|**TopOn**支持的版本|下载链接|参考网址|备注|
@@ -73,7 +73,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 
 您可以使用CocoaPods导入第三方SDK，也可以手动下载导入第三方SDK。
 
-###2.4 初始化SDK###
+### 2.4 初始化SDK###
 
 您需要在**AppDelegate**的**application:didFinishLaunchingWithOptions:**方法里面初始化**UpArpuSDK**(必须在请求广告之前去初始化SDK)：
 
@@ -84,7 +84,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
     return YES;
 }</code></pre>
 
-###2.5 使用UpArpu的广告位进行测试###
+### 2.5 使用UpArpu的广告位进行测试###
 使用**UpArpuSDK**提供的测试广告位可以更快地测试广告功能，如下图所示：
 
 |Ad Format|Placement ID|
@@ -99,10 +99,10 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 注：使用这些广告位需要关联 **AppID**：a5b0e8491845b3 和 **AppKey**：7eae0567827cfe2b22874061763f30c9 <br>
 测试完成之后，您需要将**id**和**key**更改为您自己在**TopOn**账号下创建的**id**和**key**。
 
-##3 开屏广告(Splash)##
+## 3 开屏广告(Splash)##
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
 
-###3.1 导入 Splash Framework###
+### 3.1 导入 Splash Framework###
 将**UpArpuSplash.framework**拖到您的项目中，除了**UpArpuSplash.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -111,7 +111,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 |GDT|UpArpuGDTSplashAdapter.framework|
 |Baidu|UpArpuBaiduSplashAdapter.framework|
 
-###3.1 加载并展示Splash###
+### 3.1 加载并展示Splash###
 加载并展示Splash广告的最佳时机是在应用程序的入口，即**AppDelegate**的**application:didFinishLaunchingWithOptions:**方法中，Splash的加载和展示是统一的一个API，您可以使用以下代码加载并展示一个Splash广告：
 
 <pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -124,7 +124,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 
 **注**: 在加载和展示之前调用**self.window**的**makeKeyAndVisible**方法[self.window makeKeyAndVisible];
 
-###3.2 实现Splash的Delegate###
+### 3.2 实现Splash的Delegate###
 
 您可以实现**UPArpuSplashDelegate**的方法来获取Splash的各种事件。<br> 
 1）您需要确认您的app添加了**UPArpuSplashDelegate**代理协议：
@@ -157,9 +157,10 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 }
 </code></pre>
 
-##4 激励视频(Rewarded Video)##
+
+## 4激励视频(Rewarded Video)##
 在继续接入之前，您需要保证您已经完成了以上 [配置](#1) 步骤。
-###4.1 导入Rewarded Video Framework###
+### 4.1 导入Rewarded Video Framework###
 将**UpArpuRewardedVideo.framework**拖到您的项目中，除了**UpArpuRewardedVideo.framework**，您还需要集成第三方平台的Adapter，目前**UpArpuSDK**支持以下的平台(对应平台需要导入的Adapter)。
 
 |Third Party Ad Network|Adapter Framework|
@@ -186,7 +187,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
 |Inmobi|UpArpuInmobiRewardedVideoAdapter.framework|
 |Adcolony|UpArpuAdcolonyRewardedVideoAdapter.framework|
 
-###4.2 加载Rewarded Video###
+### 4.2 加载Rewarded Video###
 您需要确认您添加了**UPArpuRewardedVideoDelegate**代理协议：
 <pre><code>@interface UPArpuRewardedVideoViewController()\<UPArpuRewardedVideoDelegate\>
 //Other properties&methods declarations
@@ -205,7 +206,7 @@ UpArpuSDK支持原生广告(Native),激励视频广告(rewardVideo)，banner广�
     NSLog(@"RV Demo: failed to load:%@", error);
 }</code></pre>
 
-###4.3 判断Rewarded Video是否ready###
+### 4.3 判断Rewarded Video是否ready###
 您可以检查rewarded video广告是否已经ready：
 <pre><code>
 if ([[UPArpuAdManager sharedManager] rewardedVideoReadyForPlacementID:@"your rv placement id"]) {
